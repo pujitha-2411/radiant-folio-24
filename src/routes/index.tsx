@@ -44,6 +44,7 @@ function Index() {
         <Experience />
         <Projects />
         <Education />
+        <Volunteering />
         <Contact />
       </main>
       <Footer />
