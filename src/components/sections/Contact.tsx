@@ -5,8 +5,20 @@ import { SectionLabel } from "../SectionLabel";
 
 export function Contact() {
   const [sent, setSent] = useState(false);
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+    const subject = `Portfolio inquiry from ${name || "someone"}`;
+    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+    const mailto = `mailto:kolakondapujitha@gmail.com?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailto;
     setSent(true);
     setTimeout(() => setSent(false), 3500);
   };
